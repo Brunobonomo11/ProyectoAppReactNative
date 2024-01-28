@@ -1,6 +1,10 @@
 import { StyleSheet, Text, TextInput, View, Button} from 'react-native';
 
 const App = () => {
+
+  const addTask = () => {
+    console.log("Se acaba de iniciar el Viaje")
+  }
   
     return (
       <View style={styles.container}>
@@ -19,25 +23,25 @@ const App = () => {
             <Text style={styles.textPasajero}>
                 Pasajero 1
             </Text>
-            <Button color="#E8F227" style={styles.botonViaje} title='Iniciar Viaje' />
+            <Button color="#E8F227" style={styles.botonViaje} title='Iniciar Viaje' onPress={addTask} />
           </View>
           <View style={styles.box}>
             <Text style={styles.textPasajero}>
                 Pasajero 2
             </Text>
-            <Button color="#E8F227" style={styles.botonViaje} title='Iniciar Viaje' />
+            <Button color="#E8F227" style={styles.botonViaje} title='Iniciar Viaje' onPress={addTask} />
           </View>
           <View style={styles.box}>
             <Text style={styles.textPasajero}>
                 Pasajero 3
             </Text>
-            <Button color="#E8F227" style={styles.botonViaje} title='Iniciar Viaje' />
+            <Button color="#E8F227" style={styles.botonViaje} title='Iniciar Viaje' onPress={addTask} />
           </View>
           <View style={styles.box}>
             <Text style={styles.textPasajero}>
                 Pasajero 4
             </Text>
-            <Button color="#E8F227" style={styles.botonViaje} title='Iniciar Viaje' />
+            <Button color="#E8F227" style={styles.botonViaje} title='Iniciar Viaje' onPress={addTask} />
           </View>
       </View>
       </View>
