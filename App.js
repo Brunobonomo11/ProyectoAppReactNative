@@ -1,20 +1,30 @@
 import { useState } from 'react';
-import { StyleSheet, Text, TextInput, View, Button} from 'react-native';
+import uuid from 'react-native-uuid';
+import { StyleSheet, Text, TextInput, View, Button, FlatList} from 'react-native';
 
 const App = () => {
-      const [newProduct, setNewProduct] = useState({})
+      
+      const [newProduct, setNewProduct] = useState({
+        title: "",
+        categoria: ""
+      })
+
       const [product, setProduct] = useState([])
 
       const addProduct = () =>{
+        console.log(newProduct)
         setProduct([...product, setProduct])
+        
         setNewProduct({
           title:"",
-          categoria:""
+          categoria:"",
+          id: ""
         })
       }
 
       const onHandlerTitle = (t) =>{
-        setNewProduct({...newProduct, title:t})
+        const id = uuid.v4()
+        setNewProduct({...newProduct, title:t,id})
       }
 
       const onHandlerCategoria = (t) => {
@@ -53,6 +63,23 @@ const App = () => {
                     <Text style={styles.textPack}>Pantallas / Monitores</Text>
                     <Button color="#FFC09F" title='Ver Más' />
                 </View>
+                {
+                  product.map(producto => (<View key={producto.id} style={styles.pack}>
+                                            <Text style={styles.textPack}>{producto.title}</Text>
+                                            <Button color="#FFC09F" title='Ver Más' />
+                                          </View> ) 
+                              )
+                }
+                {/* <FlatList 
+                data={product}
+                keyExtractor={item => item.id}
+                renderItem={({item})=>(
+                  <View style={styles.pack}>
+                  <Text style={styles.textPack}>{item.title}</Text>
+                  <Button color="#FFC09F" title='Ver Más' />
+                </View>
+                )}
+                /> */}
               </View>
         </View>
       )
