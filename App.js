@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import uuid from 'react-native-uuid';
-import { StyleSheet, Text, TextInput, View, Button, FlatList} from 'react-native';
+import { StyleSheet, Text, TextInput, View, Button, FlatList, Modal} from 'react-native';
 
 const App = () => {
-      
+
+      const [modalVisible, setModalVisible] = useState(false)
       const [newProduct, setNewProduct] = useState({
         title: "",
         categoria: ""
@@ -29,6 +30,10 @@ const App = () => {
 
       const onHandlerCategoria = (t) => {
         setNewProduct({...newProduct, categoria:t})
+      }
+
+      const deleteTask = (id) => {
+        setProduct(product.filter(product => product.id != id))
       }
   
       return (
@@ -64,22 +69,31 @@ const App = () => {
                     <Button color="#FFC09F" title='Ver Más' />
                 </View>
                 {
-                  product.map(producto => (<View key={producto.id} style={styles.pack}>
-                                            <Text style={styles.textPack}>{producto.title}</Text>
-                                            <Button color="#FFC09F" title='Ver Más' />
+                  product.map(product => (<View key={product.id} style={styles.pack}>
+                                            <Text style={styles.textPack}>{product.title}</Text>
+                                            <Button color="#FFC09F" title='Eliminar' />
                                           </View> ) 
                               )
                 }
-                {/* <FlatList 
+                <FlatList 
                 data={product}
                 keyExtractor={item => item.id}
                 renderItem={({item})=>(
                   <View style={styles.pack}>
                   <Text style={styles.textPack}>{item.title}</Text>
-                  <Button color="#FFC09F" title='Ver Más' />
+                  <Button color="#FFC09F" title='Ver Más' onPress={() => deleteTask(item)} />
                 </View>
                 )}
-                /> */}
+                />
+                <Modal
+                    visible={modalVisible}
+                >
+                <View>
+                    <Text>Estas Seguro de eliminar este producto ?</Text>
+                    <Button title='si' onPress={() => console.log("Eliminado")} />
+                    <Button title='no' onPress={() => setModalVisible(false)} />
+                </View>
+                </Modal>
               </View>
         </View>
       )
